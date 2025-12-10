@@ -1,67 +1,75 @@
-# 🚀 Quick Start Guide - City Pulse
+# 🚀 City Pulse - Quick Start Guide
 
-## Run the App in 3 Simple Steps
+## Get Running in 3 Steps
 
-### Step 1: Navigate to Project
+### 1️⃣ Navigate & Install
 ```bash
 cd city-pulse
-```
-
-### Step 2: Install Dependencies (if not already done)
-```bash
 npm install
 ```
 
-### Step 3: Start the App
+### 2️⃣ Start the App
 ```bash
 npx expo start
 ```
 
-Then press:
-- **`i`** for iOS Simulator
-- **`a`** for Android Emulator  
-- **Scan QR code** with Expo Go app on your phone
-
-## 📱 First Time Using the App?
-
-1. **Select Your City** - Choose from 12 major cities
-2. **Browse News** - Scroll through city-specific articles
-3. **Bookmark Articles** - Tap the heart icon ❤️
-4. **Check Alerts** - Tap the 🚨 icon for emergency alerts
-5. **Change City** - Tap the 🌍 icon anytime
-
-## 🎯 Quick Navigation
-
-- **📚** = View Bookmarks
-- **🚨** = Emergency Alerts
-- **🌍** = Change City
-- **Pull Down** = Refresh News
-
-## ⚡ Troubleshooting
-
-**Metro bundler not starting?**
-```bash
-npx expo start --clear
-```
-
-**Dependencies issue?**
-```bash
-rm -rf node_modules
-npm install
-```
-
-**Simulator not opening?**
-- Make sure Xcode is installed (iOS)
-- Make sure Android Studio is installed (Android)
-
-## 🌟 Features to Try
-
-✅ Select different cities and compare news
-✅ Bookmark your favorite articles
-✅ Check emergency alerts and contacts
-✅ Refresh the news feed
-✅ Read full articles in the WebView
+### 3️⃣ Open on Device
+- **iOS**: Press `i` or scan QR code with Camera
+- **Android**: Press `a` or scan QR with Expo Go
+- **Web**: Press `w`
 
 ---
 
-**Need help?** Check README.md for detailed documentation.
+## ✅ What You Get
+
+### 5 Complete Screens:
+1. **City Selector** - Choose from 12 cities
+2. **News Feed** - 8 articles per city
+3. **Article Reader** - WebView integration
+4. **Bookmarks** - Save articles (city-specific)
+5. **Emergency Alerts** - Color-coded alerts
+
+### Key Features:
+- ✅ Pull to refresh
+- ✅ Bookmark articles
+- ✅ City-specific content
+- ✅ Emergency contacts
+- ✅ Beautiful UI
+
+---
+
+## 📝 Optional: Add Real News API
+
+### Want real news instead of sample data?
+
+1. **Sign up**: https://gnews.io/ (free)
+2. **Get API key** from dashboard
+3. **Edit** `src/utils/newsApi.js`:
+   ```javascript
+   const API_KEY = 'your_api_key_here';
+   ```
+4. **Restart** the app
+
+**Note:** App works perfectly without API key using sample data!
+
+---
+
+## 🎯 Quick Test
+
+1. Launch app → Select a city
+2. Scroll through news → Tap heart to bookmark
+3. Tap 📚 to see bookmarks
+4. Tap 🚨 for emergency alerts
+5. Tap 🌍 to change city
+
+---
+
+## 📚 More Info
+
+- **Full docs**: See `README.md`
+- **API setup**: See `API_SETUP.md`
+- **Complete checklist**: See `FINAL_CHECKLIST.md`
+
+---
+
+**That's it! Your app is ready to use! 🎉**

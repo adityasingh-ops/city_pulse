@@ -10,21 +10,29 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function BookmarksScreen({ navigation }) {
+export default function BookmarksScreen({ navigation, route }) {
   const [bookmarks, setBookmarks] = useState([]);
+  const city = route.params?.city || 'New York';
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       loadBookmarks();
     });
     return unsubscribe;
-  }, [navigation]);
+  }, [navigation, city]);
+
+  useEffect(() => {
+    loadBookmarks();
+  }, [city]);
 
   const loadBookmarks = async () => {
     try {
-      const saved = await AsyncStorage.getItem('bookmarks');
+      // Load bookmarks specific to the current city
+      const saved = await AsyncStorage.getItem(`bookmarks_${city}`);
       if (saved) {
         setBookmarks(JSON.parse(saved));
+      } else {
+        setBookmarks([]);
       }
     } catch (error) {
       console.error('Error loading bookmarks:', error);
@@ -35,7 +43,7 @@ export default function BookmarksScreen({ navigation }) {
     try {
       const updatedBookmarks = bookmarks.filter((b) => b.url !== article.url);
       setBookmarks(updatedBookmarks);
-      await AsyncStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+      await AsyncStorage.setItem(`bookmarks_${city}`, JSON.stringify(updatedBookmarks));
       Alert.alert('Removed', 'Article removed from bookmarks');
     } catch (error) {
       console.error('Error removing bookmark:', error);
@@ -72,7 +80,7 @@ export default function BookmarksScreen({ navigation }) {
         <Text style={styles.emptyIcon}>📚</Text>
         <Text style={styles.emptyTitle}>No Saved Articles</Text>
         <Text style={styles.emptyText}>
-          Articles you bookmark will appear here
+          Articles you bookmark in {city} will appear here
         </Text>
       </View>
     );
@@ -80,6 +88,9 @@ export default function BookmarksScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.cityBanner}>
+        <Text style={styles.cityText}>📍 {city} Bookmarks</Text>
+      </View>
       <FlatList
         data={bookmarks}
         renderItem={renderBookmark}
@@ -94,6 +105,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f4f8',
+  },
+  cityBanner: {
+    backgroundColor: '#dbeafe',
+    padding: 12,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#93c5fd',
+  },
+  cityText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1e40af',
   },
   emptyContainer: {
     flex: 1,
